@@ -1,5 +1,6 @@
 # ESPTrueRandom
 TrueRandom Arduino library for the ESP
+
 **This is a fork from [ESP8266TrueRandom](https://github.com/marvinroger/ESP8266TrueRandom).**
 **It has been modified to be compatible to ESP32**
 
