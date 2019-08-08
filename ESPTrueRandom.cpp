@@ -4,16 +4,21 @@
  * https://code.google.com/archive/p/tinkerit/ https://github.com/Cathedrow/TrueRandom
  * Copyright (c) 2010 Peter Knight, Tinker.it! All rights reserved.
  * Now modified for the ESP8266
+* 
+ * 2019-08-08 Forked from ESP8266TrueRandom
+ * Added support for ESP32
+ * Renamed to ESPTrueRandom
+ * 
  */
 
-#include "ESP8266TrueRandom.h"
+#include "ESPTrueRandom.h"
 
-ICACHE_FLASH_ATTR ESP8266TrueRandomClass::ESP8266TrueRandomClass() {
+ICACHE_FLASH_ATTR ESPTrueRandomClass::ESPTrueRandomClass() {
 	useRNG = true;
 	lastYield = 0;
 }
 
-ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBitRaw(void) {
+ICACHE_FLASH_ATTR int ESPTrueRandomClass::randomBitRaw(void) {
   // Needed to keep wifi stack running smoothly
   // And to avoid wdt reset
   if (lastYield == 0 || millis() - lastYield >= 50) {
@@ -27,7 +32,7 @@ ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBitRaw(void) {
   return bit & 1;
 }
 
-ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBitRaw2(void) {
+ICACHE_FLASH_ATTR int ESPTrueRandomClass::randomBitRaw2(void) {
   // Software whiten bits using Von Neumann algorithm
   //
   // von Neumann, John (1951). "Various techniques used in connection
@@ -43,7 +48,7 @@ ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBitRaw2(void) {
   return 0;
 }
 
-ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBit(void) {
+ICACHE_FLASH_ATTR int ESPTrueRandomClass::randomBit(void) {
   // Software whiten bits using Von Neumann algorithm
   //
   // von Neumann, John (1951). "Various techniques used in connection
@@ -59,28 +64,28 @@ ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::randomBit(void) {
   return 0;
 }
 
-ICACHE_FLASH_ATTR char ESP8266TrueRandomClass::randomByte(void) {
+ICACHE_FLASH_ATTR char ESPTrueRandomClass::randomByte(void) {
   char result = 0;
   uint8_t i;
   for (i=8; i--;) result += result + randomBit();
   return result;
 }
 
-ICACHE_FLASH_ATTR int ESP8266TrueRandomClass::rand() {
+ICACHE_FLASH_ATTR int ESPTrueRandomClass::rand() {
   int result = 0;
   uint8_t i;
   for (i=15; i--;) result += result + randomBit();
   return result;
 }
 
-ICACHE_FLASH_ATTR long ESP8266TrueRandomClass::random() {
+ICACHE_FLASH_ATTR long ESPTrueRandomClass::random() {
   long result = 0;
   uint8_t i;
   for (i=31; i--;) result += result + randomBit();
   return result;
 }
 
-ICACHE_FLASH_ATTR long ESP8266TrueRandomClass::random(long howBig) {
+ICACHE_FLASH_ATTR long ESPTrueRandomClass::random(long howBig) {
   long randomValue;
   long topBit;
   long bitPosition;
@@ -123,21 +128,21 @@ ICACHE_FLASH_ATTR long ESP8266TrueRandomClass::random(long howBig) {
   return randomValue;
 }
 
-ICACHE_FLASH_ATTR long ESP8266TrueRandomClass::random(long howSmall, long howBig) {
+ICACHE_FLASH_ATTR long ESPTrueRandomClass::random(long howSmall, long howBig) {
   if (howSmall >= howBig) return howSmall;
   long diff = howBig - howSmall;
-  return ESP8266TrueRandomClass::random(diff) + howSmall;
+  return ESPTrueRandomClass::random(diff) + howSmall;
 }
 
-ICACHE_FLASH_ATTR void ESP8266TrueRandomClass::memfill(char* location, int size) {
+ICACHE_FLASH_ATTR void ESPTrueRandomClass::memfill(char* location, int size) {
   for (;size--;) *location++ = randomByte();
 }
 
-ICACHE_FLASH_ATTR void ESP8266TrueRandomClass::mac(uint8_t* macLocation) {
+ICACHE_FLASH_ATTR void ESPTrueRandomClass::mac(uint8_t* macLocation) {
   memfill((char*)macLocation,6);
 }
 
-ICACHE_FLASH_ATTR void ESP8266TrueRandomClass::uuid(uint8_t* uuidLocation) {
+ICACHE_FLASH_ATTR void ESPTrueRandomClass::uuid(uint8_t* uuidLocation) {
   // Generate a Version 4 UUID according to RFC4122
   memfill((char*)uuidLocation,16);
   // Although the UUID contains 128 bits, only 122 of those are random.
@@ -146,7 +151,7 @@ ICACHE_FLASH_ATTR void ESP8266TrueRandomClass::uuid(uint8_t* uuidLocation) {
   uuidLocation[8] = 0x80 | (0x3F & uuidLocation[8]);
 }
 
-ICACHE_FLASH_ATTR String ESP8266TrueRandomClass::uuidToString(uint8_t* uuidLocation) {
+ICACHE_FLASH_ATTR String ESPTrueRandomClass::uuidToString(uint8_t* uuidLocation) {
   String string = "";
   int i;
   for (i=0; i<16; i++) {
@@ -165,4 +170,4 @@ ICACHE_FLASH_ATTR String ESP8266TrueRandomClass::uuidToString(uint8_t* uuidLocat
   return string;
 }
 
-ESP8266TrueRandomClass ESP8266TrueRandom;
+ESPTrueRandomClass ESPTrueRandom;

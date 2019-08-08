@@ -4,18 +4,27 @@
  * https://code.google.com/archive/p/tinkerit/ https://github.com/Cathedrow/TrueRandom
  * Copyright (c) 2010 Peter Knight, Tinker.it! All rights reserved.
  * Now modified for the ESP8266
+ * 
+ * 2019-08-08 Forked from ESP8266TrueRandom
+ * Added support for ESP32
+ * Renamed to ESPTrueRandom
+ * 
  */
 
-#ifndef ESP8266TrueRandom_h
-#define ESP8266TrueRandom_h
+#ifndef ESPTrueRandom_h
+#define ESPTrueRandom_h
+
+#if defined ESP32
+  #define RANDOM_REG32 *((volatile uint32_t *)(0x3FF75144))
+#endif
 
 #include <Arduino.h>
 #include <inttypes.h>
 
-class ESP8266TrueRandomClass
+class ESPTrueRandomClass
 {
   public:
-	ICACHE_FLASH_ATTR ESP8266TrueRandomClass();
+	ICACHE_FLASH_ATTR ESPTrueRandomClass();
 	ICACHE_FLASH_ATTR int rand();
 	ICACHE_FLASH_ATTR long random();
 	ICACHE_FLASH_ATTR long random(long howBig);
@@ -32,5 +41,5 @@ class ESP8266TrueRandomClass
     ICACHE_FLASH_ATTR int randomBitRaw(void);
     ICACHE_FLASH_ATTR int randomBitRaw2(void);
 };
-extern ESP8266TrueRandomClass ESP8266TrueRandom;
+extern ESPTrueRandomClass ESPTrueRandom;
 #endif

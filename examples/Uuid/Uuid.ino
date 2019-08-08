@@ -19,7 +19,7 @@
  *   http://tools.ietf.org/html/rfc4122
  */
 
-#include "ESP8266TrueRandom.h"
+#include "ESPTrueRandom.h"
 
 byte uuidNumber[16]; // UUIDs in binary form are 16 bytes long
 
@@ -27,8 +27,8 @@ void setup() {
   Serial.begin(9600);
 
   // Generate a new UUID
-  ESP8266TrueRandom.uuid(uuidNumber);
-  String uuidStr = ESP8266TrueRandom.uuidToString(uuidNumber);
+  ESPTrueRandom.uuid(uuidNumber);
+  String uuidStr = ESPTrueRandom.uuidToString(uuidNumber);
   Serial.println("The UUID number is " + uuidStr);
   
 }

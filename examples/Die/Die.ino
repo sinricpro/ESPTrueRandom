@@ -5,7 +5,7 @@
  *
  */
 
-#include "ESP8266TrueRandom.h"
+#include "ESPTrueRandom.h"
 
 void setup() {
   Serial.begin(9600);
@@ -13,19 +13,19 @@ void setup() {
   delay(1000);
   
   Serial.print("6 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,7));
+  Serial.println(ESPTrueRandom.random(1,7));
   Serial.print("4 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,5));
+  Serial.println(ESPTrueRandom.random(1,5));
   Serial.print("8 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,9));
+  Serial.println(ESPTrueRandom.random(1,9));
   Serial.print("10 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,11));
+  Serial.println(ESPTrueRandom.random(1,11));
   Serial.print("12 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,13));
+  Serial.println(ESPTrueRandom.random(1,13));
   Serial.print("20 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,21));
+  Serial.println(ESPTrueRandom.random(1,21));
   Serial.print("100 sided die: ");
-  Serial.println(ESP8266TrueRandom.random(1,101));
+  Serial.println(ESPTrueRandom.random(1,101));
 }
 
 void loop() {

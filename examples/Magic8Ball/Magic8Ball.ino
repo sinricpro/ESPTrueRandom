@@ -9,7 +9,7 @@
  *
  */
 
-#include "ESP8266TrueRandom.h"
+#include "ESPTrueRandom.h"
 
 char* answers[20] = {
   "As I see it, yes",
@@ -50,7 +50,7 @@ void setup() {
   Serial.print(". ");
   delay(1000);
 
-  answerNumber = ESP8266TrueRandom.random(20);
+  answerNumber = ESPTrueRandom.random(20);
   Serial.println( answers[answerNumber] );
 }
 

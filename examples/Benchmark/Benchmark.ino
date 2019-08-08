@@ -1,4 +1,4 @@
-#include "ESP8266TrueRandom.h"
+#include "ESPTrueRandom.h"
 
 unsigned long startTime;
 int i;
@@ -6,7 +6,7 @@ int i;
 void setup() {
   Serial.begin(9600);
   
-  Serial.println("ESP8266TrueRandom benchmark");
+  Serial.println("ESPTrueRandom benchmark");
   Serial.println("--------------------");
   Serial.println();
 
@@ -16,31 +16,31 @@ void setup() {
 
   Serial.print("randomBit(): ");
   startTime = millis();
-  ESP8266TrueRandom.randomBit();
+  ESPTrueRandom.randomBit();
   Serial.print(millis() - startTime);
   Serial.println("ms");
   
   Serial.print("randomByte(): ");
   startTime = millis();
-  ESP8266TrueRandom.randomByte();
+  ESPTrueRandom.randomByte();
   Serial.print(millis() - startTime);
   Serial.println("ms");
   
   Serial.print("random(100): ");
   startTime = millis();
-  ESP8266TrueRandom.random(100);
+  ESPTrueRandom.random(100);
   Serial.print(millis() - startTime);
   Serial.println("ms");
   
   Serial.print("random(65536): ");
   startTime = millis();
-  ESP8266TrueRandom.random(65536);
+  ESPTrueRandom.random(65536);
   Serial.print(millis() - startTime);
   Serial.println("ms");
   
   Serial.print("random(65537): ");
   startTime = millis();
-  ESP8266TrueRandom.random(65537);
+  ESPTrueRandom.random(65537);
   Serial.print(millis() - startTime);
   Serial.println("ms");
 }
